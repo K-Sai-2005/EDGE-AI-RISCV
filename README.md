@@ -1,4 +1,4 @@
-# 🏗️ EdgeAI-CrackDetect-RISCV
+#  EdgeAI-CrackDetect-RISCV
 
 > **Concrete Crack Detection on a RISC-V Microcontroller**  
 > An end-to-end Edge AI pipeline: image classification → INT8 quantization → bare-metal C inference on SiFive FE310-G002
@@ -11,12 +11,12 @@
 
 ---
 
-## 📋 Overview
+##  Overview
 
 This repository documents a complete **Edge AI project** for detecting cracks in concrete surfaces from images. The project classifies input images into two categories:
 
-- ✅ **Negative** — No crack (surface is intact)
-- ⚠️ **Positive** — Crack detected (structural risk)
+-  **Negative** — No crack (surface is intact)
+-  **Positive** — Crack detected (structural risk)
 
 What makes this project unique is its **deployment target**: the SiFive FE310-G002 RISC-V microcontroller with only **16KB of SRAM**, running without an operating system.
 
@@ -26,7 +26,7 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 
 ---
 
-## 🎯 Why Crack Detection?
+##  Why Crack Detection?
 
 | Property | Details |
 |---|---|
@@ -38,9 +38,9 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 
 ---
 
-## 📸 Results
+##  Results
 
-### 1️⃣ Sample Training Images
+### 1. Sample Training Images
 
 > Crack (Positive) vs No Crack (Negative) samples from the dataset after preprocessing to 64×64
 
@@ -48,7 +48,15 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 
 ---
 
-### 2️⃣ Training History
+### 2. Parameter Details
+
+> Number of parameters to be trained 
+
+![Test Sample](docs/parameter_details.png)
+
+---
+
+### 3. Training History
 
 > Model Accuracy and Loss curves over 10 epochs. Val accuracy reaches **99.9%** with no overfitting.
 
@@ -56,7 +64,7 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 
 ---
 
-### 3️⃣ Confusion Matrix & ROC Curve
+### 4. Confusion Matrix & ROC Curve
 
 > Evaluation on 8,000 held-out validation images. ROC AUC = **0.9998**. Only 15 misclassifications out of 8,000.
 
@@ -64,15 +72,7 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 
 ---
 
-### 4️⃣ Test Sample Exported to C Array
-
-> One validation image exported as INT8 C array for firmware verification on RISC-V
-
-![Test Sample](docs/test_sample.png)
-
----
-
-### 5️⃣ RISC-V Inference Output
+### 5. RISC-V Inference Output
 
 > Firmware running on SiFive FE310-G002 (simulated via QEMU in GitHub Codespaces). Output printed via semihosting UART.
 
@@ -80,7 +80,7 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 
 ---
 
-## 📊 Model Performance Summary
+##  Model Performance Summary
 
 | Metric | Value |
 |---|---|
@@ -91,11 +91,11 @@ This project was built as part of the **VLSI System Design (VSD) RISC-V Edge AI*
 | Quantized model size | ~180 KB (INT8) |
 | Size reduction vs float32 | **~4×** |
 | Inference time (simulated @ 16 MHz) | ~2 ms |
-| RISC-V cross-compilation | ✅ RV32IMAC |
+| RISC-V cross-compilation |  RV32IMAC |
 
 ---
 
-## 🏗️ Project Architecture
+##  Project Architecture
 
 ```
 Input Image (64×64×3 RGB)
@@ -136,7 +136,7 @@ Input Image (64×64×3 RGB)
 
 ---
 
-## 🧩 The Edge AI Challenge: Fitting a CNN in 16KB SRAM
+##  The Edge AI Challenge: Fitting a CNN in 16KB SRAM
 
 The FE310-G002 has **16KB of SRAM** and **128Mbit (~16MB) QSPI Flash**. Key strategies:
 
@@ -150,7 +150,7 @@ The FE310-G002 has **16KB of SRAM** and **128Mbit (~16MB) QSPI Flash**. Key stra
 
 ---
 
-## 🛠️ Full Pipeline
+##  Full Pipeline
 
 ```
 Google Colab (Python)                     GitHub Codespaces (FreedomStudio)
@@ -171,12 +171,12 @@ INT8 Post-Training Quantization                │
     ▼                                     QEMU simulation / host gcc run
 Export → model_params.h/.c                     │
          test_image.h                          ▼
-         weights/*.inc              Console output: CRACK DETECTED ✅
+         weights/*.inc              Console output: CRACK DETECTED 
 ```
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 EDGE-AI-RISCV/
@@ -212,7 +212,7 @@ EDGE-AI-RISCV/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Part A — Train the Model (Google Colab)
 
@@ -327,7 +327,7 @@ Expected output:
 
 ---
 
-## 💻 Hardware & Software
+##  Hardware & Software
 
 ### Target Hardware
 | Component | Details |
@@ -351,7 +351,7 @@ Expected output:
 
 ---
 
-## 🔬 How the INT8 Inference Engine Works
+##  How the INT8 Inference Engine Works
 
 The custom C inference engine (`inference_engine.c`) performs all computation in integer arithmetic — no FPU, no malloc, no OS:
 
@@ -382,7 +382,7 @@ x > +64        →  +127   (sigmoid ≈ 1)
 
 ---
 
-## 🔧 Extending This Project
+##  Extending This Project
 
 | Extension | How |
 |---|---|
@@ -394,13 +394,13 @@ x > +64        →  +127   (sigmoid ≈ 1)
 
 ---
 
-## 📜 License
+##  License
 
 MIT License — see [LICENSE](LICENSE)
 
 ---
 
-## ✨ Acknowledgments
+##  Acknowledgments
 
 - **VLSI System Design (VSD)** — RISC-V Edge AI course and Codespaces environment
 - **SiFive** — FE310-G002 SoC, FreedomStudio 3.1.1, RISC-V GNU toolchain
